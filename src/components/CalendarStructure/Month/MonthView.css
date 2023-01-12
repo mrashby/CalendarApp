@@ -1,0 +1,57 @@
+
+.month-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(11, 107, 103, 0.467);
+}
+
+.month {
+    display: flex;
+    justify-content: center;
+    color: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 22px;
+}
+
+/* columns */
+
+.weekdays {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+}
+
+.weekday {
+    flex-grow: 1;
+}
+
+.weekday-header {
+    color: rgb(247, 240, 240);
+    display: flex;
+    justify-content: center;
+    border: 1px black;
+    border-style: solid;
+    margin: 1px;
+    background-color: rgb(43, 41, 41);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.day-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 1px;
+    border: 1px rgb(81, 76, 76);
+    border-style: solid;
+    height: 150px;
+    background-color: rgb(86, 80, 80);
+}
+
+.day-text {
+    margin: 5px;
+    color: rgb(236, 221, 221);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
