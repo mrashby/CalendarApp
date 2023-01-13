@@ -1,17 +1,24 @@
 import React from "react";
 import DayColumn from './DayColumn';
 
-interface props {
-    days: string[],
-}
 
 // returns static Sun - Sat grid
-const ColumnGrid = ({days}: props) => {
+const ColumnGrid = () => {
+
+  const weekdays: { name: string, id: number }[] = [
+    { name: "Sunday", id: 0},
+    { name: "Monday", id: 1},
+    { name: "Tuesday", id: 2},
+    { name: "Wednesday", id: 3},
+    { name: "Thursday", id: 4},
+    { name: "Friday", id: 5},
+    { name: "Saturday", id: 6},
+  ];
 
   return (
     <ul className='weekdays'>
-        {days.map(day =>
-            <DayColumn key={day} day={day} />
+        {weekdays.map(day =>
+            <DayColumn key={day.id} day={day.name} id={day.id} />
         )}
     </ul>
   );

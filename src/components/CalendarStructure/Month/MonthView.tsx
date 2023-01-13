@@ -22,22 +22,12 @@ const MonthView = () => {
     "December",
   ];
 
-  const days: string[] = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
   const currentMonth: string = months[currentDate.getMonth()];
 
   return (
     <div className='month-grid'>
       <div className='month'>{currentMonth}</div>
-        <ColumnGrid days={days} />
+        <ColumnGrid />
     </div>
   );
 };

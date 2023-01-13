@@ -1,24 +1,77 @@
 import React from "react";
+import DayHeader from "./DayHeader";
 import DayBox from "./DayBox";
 
 interface props {
   day: string;
+  id: number;
 }
 
-const getCurrentMonth = new Date().getMonth();
-console.log(getCurrentMonth);
+const DayColumn = ({ day, id }: props) => {
 
+  // hardcoded the year + month value temporarily
+  let yearValue: number = 2023;
+  let monthValue: number = 2; 
 
-// calculate total number of days, start on proper weekday, populate grid...
-// const findNumberOfDays = '';
+  // creating a default date value for the input year + month
+  let setDate: Date = new Date(yearValue, monthValue);
 
+  // calculate number of days in the month
+  let numberOfDaysInMonth: number = new Date(setDate.getFullYear(), setDate.getMonth() + 1, 0).getDate();
 
-const DayColumn = ({ day }: props) => {
+  // declare main array
+  let numberOfDaysArray: { value: number, id: number, month: number}[] = [];
+
+  // use array to trigger function number of times equal to the days in the month
+  for ( let x: number = 1; x <= numberOfDaysInMonth; x++ ) {
+    let idNumber: string = `${monthValue}.${x}`
+    numberOfDaysArray.push({ value: x, id: +idNumber, month: monthValue });
+  };
+
+  // fill in blocks if the first day of the month is not Sunday (first grid column)
+  let firstDayOfMonth: number = new Date(setDate.getFullYear(), setDate.getMonth(), 1).getDay();
+
+  for ( let x: number = 0; x > -firstDayOfMonth; x-- ) {
+
+    let getPreviousDate: number = new Date(setDate.getFullYear(), setDate.getMonth(), x).getDate();
+    let previousMonth: number = monthValue - 1;
+    let idNumber: string = `${previousMonth}.${getPreviousDate}`
+    
+    numberOfDaysArray.unshift({ value: getPreviousDate, id: +idNumber, month: previousMonth});
+  };
+
+  // fill in blocks if the last day of the month is not Saturday (last grid column)
+  let lastDayOfMonth: number = new Date(setDate.getFullYear(), setDate.getMonth() + 1, 0).getDay();
+  // needed another increment within this loop
+  let inc: number = 1;
+
+  for ( let x: number = 6; x > lastDayOfMonth; x-- ) {
+    let getNextDate: number = new Date(setDate.getFullYear(), setDate.getMonth() + 1, inc).getDate();
+    let nextMonth: number = monthValue + 1;
+    let idNumber: string = `${nextMonth}.${getNextDate}`
+    
+    numberOfDaysArray.push({ value: getNextDate, id: +idNumber, month: nextMonth});
+    inc++;
+  };
+
+  // function to assign dates to relevant day column
+  const calculateDateGrid = (dateInput: number, itemId: number, month: number) => {
+
+    let dayOfMonth: Date = new Date(setDate.getFullYear(), month, dateInput);
+    let weekdayNumber: number = dayOfMonth.getDay();
+
+    // matching the day of month to the column header
+    if (weekdayNumber === id) {
+        return <DayBox key={itemId} dayValue={dateInput} />
+      };
+    };
 
   return (
     <li className='weekday'>
-      <div className='weekday-header'>{day}</div>
-      <DayBox />
+      <DayHeader day={day}/>
+      { numberOfDaysArray.map(x => 
+        calculateDateGrid(x.value, x.id, x.month)
+      )}
     </li>
   );
 };
