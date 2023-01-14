@@ -2,14 +2,24 @@ import React from "react";
 
 interface props {
   dayValue: number;
+  boxClass: boolean;
 }
 
-const DayBox = ({dayValue}: props) => {
+const DayBox = ({ dayValue, boxClass }: props) => {
+  console.log(boxClass);
 
   return (
-      <div className='day-box'>
-        <div className='day-text'>{dayValue}</div>
-      </div>
+    <div>
+      {boxClass ? (
+        <div className='day-box'>
+          <div className='day-text'>{dayValue}</div>
+        </div>
+      ) : (
+        <div className='diff-day-box'>
+          <div className='day-text'>{dayValue}</div>
+        </div>
+      )}
+    </div>
   );
 };
 

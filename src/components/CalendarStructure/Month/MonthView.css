@@ -50,6 +50,17 @@
     background-color: rgb(86, 80, 80);
 }
 
+.diff-day-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 1px;
+    border: 1px rgb(81, 76, 76);
+    border-style: solid;
+    height: 150px;
+    background-color: rgb(110, 103, 103);
+}
+
 .day-text {
     margin: 5px;
     color: rgb(236, 221, 221);
