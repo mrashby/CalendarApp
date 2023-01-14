@@ -6,7 +6,7 @@
     background-color: rgba(11, 107, 103, 0.467);
 }
 
-.month {
+.month-header {
     display: flex;
     justify-content: center;
     color: auto;

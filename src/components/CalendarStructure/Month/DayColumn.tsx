@@ -11,7 +11,7 @@ const DayColumn = ({ day, id }: props) => {
 
   // hardcoded the year + month value temporarily
   let yearValue: number = 2023;
-  let monthValue: number = 2; 
+  let monthValue: number = 7; 
 
   // creating a default date value for the input year + month
   let setDate: Date = new Date(yearValue, monthValue);
