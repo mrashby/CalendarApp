@@ -1,27 +1,49 @@
 import React from "react";
 
 interface props {
-    selectedMonth: string;
     monthArray: {value: string, id: number }[];
     selectedMonthHandler: Function;
+    selectedYearHandler: Function;
   }
 
 // unsure if I actually want selectedMonth passed...
 // will use for default select option later
-const MonthHeader = ({selectedMonth, monthArray, selectedMonthHandler}: props) => {
+const MonthHeader = ({monthArray, selectedMonthHandler, selectedYearHandler}: props) => {
 
-    const updateSelectedMonth = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(+event.target.value);
-        let tempNumber: number = +event.target.value
-        selectedMonthHandler(tempNumber);
-    }
+  const yearSelectorArray: number[] = [];
+
+  let currentYear: number = new Date().getFullYear();
+  // hardcoding year range to 10 years past/future
+  let yearMin: number = currentYear - 10;
+  let yearMax: number = currentYear + 10;
+
+  for (let x = yearMin; x <= yearMax; x++) {
+    yearSelectorArray.push(x);
+  };
+
+  const updateSelectedMonth = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      let monthId: number = +event.target.value;
+      selectedMonthHandler(monthId);
+  };
+
+  const updateSelectedYear = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    let year = +event.target.value;
+    selectedYearHandler(year);
+  };
 
   return (
-    <select className='month-header' onChange={updateSelectedMonth}>
+    <div className="date-selectors">
+      <select className='selector' onChange={updateSelectedMonth}>
         { monthArray.map(month => 
-            <option key={month.id} value={month.id}>{month.value}</option>
-        )};
-    </select>
+            <option className="option" key={month.id} value={month.id}>{month.value}</option>
+        )}
+      </select>
+      <select className="selector" onChange={updateSelectedYear}>
+        { yearSelectorArray.map(year => 
+          <option className="option" key={year} value={year}>{year}</option>
+        )}
+      </select>
+    </div>
   );
 };
 

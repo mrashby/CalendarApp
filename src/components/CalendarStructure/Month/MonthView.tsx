@@ -24,17 +24,23 @@ const MonthView = () => {
   // set current date to var in case I reuse it
   const currentDate: Date = new Date();
 
-  const [selectedMonth, setSelectedMonth] = useState(months[currentDate.getMonth()].value);
+  const [selectedMonthId, setSelectedMonthId] = useState(months[currentDate.getMonth()].id);
+  const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
 
-  const selectedMonthHandler = (input: number) => {
-    let arrayIndex = months[input].value;
-    setSelectedMonth(arrayIndex);
+  const selectedMonthHandler = (monthInput: number) => {
+    let monthId = months[monthInput].id;
+    setSelectedMonthId(monthId);
+  };
+
+  const selectedYearHandler = (yearInput: number) => {
+    let year = yearInput;
+    setSelectedYear(year);
   };
 
   return (
     <div className='month-grid'>
-      <MonthHeader selectedMonth={selectedMonth} monthArray={months} selectedMonthHandler={selectedMonthHandler} />
-      <ColumnGrid />
+      <MonthHeader monthArray={months} selectedMonthHandler={selectedMonthHandler} selectedYearHandler={selectedYearHandler} />
+      <ColumnGrid selectedMonthId={selectedMonthId} selectedYear={selectedYear} />
     </div>
   );
 };

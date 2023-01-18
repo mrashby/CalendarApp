@@ -6,13 +6,24 @@
     background-color: rgba(11, 107, 103, 0.467);
 }
 
-.month-header {
+.date-selectors {
+    display: flex;
+    justify-content: center;
+    margin: 1px;
+}
+
+.date-selectors select {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 22px;
+}
+
+/* .month-header {
     display: flex;
     justify-content: center;
     color: auto;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 22px;
-}
+} */
 
 /* columns */
 

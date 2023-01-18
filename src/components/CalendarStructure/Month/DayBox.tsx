@@ -2,15 +2,14 @@ import React from "react";
 
 interface props {
   dayValue: number;
-  boxClass: boolean;
+  currentMonth: boolean;
 }
 
-const DayBox = ({ dayValue, boxClass }: props) => {
-  console.log(boxClass);
+const DayBox = ({ dayValue, currentMonth }: props) => {
 
   return (
     <div>
-      {boxClass ? (
+      {currentMonth ? (
         <div className='day-box'>
           <div className='day-text'>{dayValue}</div>
         </div>
