@@ -1,5 +1,8 @@
 import React from "react";
 
+import MonthSelector from "./MonthSelector";
+import YearSelector from "./YearSelector";
+
 interface props {
     monthArray: {value: string, id: number }[];
     selectedMonthHandler: Function;
@@ -35,12 +38,13 @@ const MonthHeader = ({monthArray, selectedMonthHandler, selectedYearHandler}: pr
     <div className="date-selectors">
       <select className='selector' onChange={updateSelectedMonth}>
         { monthArray.map(month => 
-            <option className="option" key={month.id} value={month.id}>{month.value}</option>
+          <MonthSelector key={month.id} id={month.id} name={month.value}/>
+            // <option className="option" key={month.id} value={month.id}>{month.value}</option>
         )}
       </select>
       <select className="selector" onChange={updateSelectedYear}>
         { yearSelectorArray.map(year => 
-          <option className="option" key={year} value={year}>{year}</option>
+          <YearSelector key={year} year={year} />
         )}
       </select>
     </div>
