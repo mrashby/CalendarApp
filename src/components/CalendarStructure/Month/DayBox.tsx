@@ -1,23 +1,26 @@
 import React from "react";
+import Event from "../../CalendarEvents/Event";
 
-interface props {
-  dayValue: number;
-  currentMonth: boolean;
-}
+import { DayBoxProps } from '../../../structure/Data/interfaces'
 
-const DayBox = ({ dayValue, currentMonth }: props) => {
+const DayBox = ({ dayValue, currentMonth, today }: DayBoxProps) => {
+
+  let divClass: string = '';
+
+  if (currentMonth && today) {
+    divClass = 'selected-day-box';
+  }
+  else if (currentMonth) {
+    divClass = 'day-box';
+  }
+  else {
+    divClass = 'diff-day-box';
+  }
 
   return (
-    <div>
-      {currentMonth ? (
-        <div className='day-box'>
-          <div className='day-text'>{dayValue}</div>
-        </div>
-      ) : (
-        <div className='diff-day-box'>
-          <div className='day-text'>{dayValue}</div>
-        </div>
-      )}
+    <div className={divClass}>
+      <div className='day-text'>{dayValue}</div>
+      <Event />
     </div>
   );
 };

@@ -1,10 +1,8 @@
 import React from "react";
 
-interface props {
-    day: string;
-  }
+import { DayHeaderProps } from '../../../structure/Data/interfaces'
 
-const DayHeader = ({day}: props) => {
+const DayHeader = ({ day }: DayHeaderProps) => {
 
   return (
     <div className='weekday-header'>{day}</div>

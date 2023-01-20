@@ -1,19 +1,12 @@
 import React from "react";
 
-interface props {
-    year: number,
-};
+import { YearSelectorProps } from '../../../structure/Data/interfaces'
 
-const YearSelector = ({ year }: props) => {
 
-    let currentYear: number = new Date().getFullYear();
-
-    switch ( year === currentYear ) {
-        case(true):
-            return <option className="option" value={year} selected>{year}</option>
-        default:
-            return <option className="option" value={year}>{year}</option>
-    };
+// this was a separate component because I previously had conditionals below that have now been removed
+// leaving this as-is in case I decide to change the logic
+const YearSelector = ({ year }: YearSelectorProps) => {
+    return <option className="option" value={year}>{year}</option>
 };
 
 export default YearSelector;

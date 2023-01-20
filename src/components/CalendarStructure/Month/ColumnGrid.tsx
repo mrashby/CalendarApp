@@ -1,13 +1,10 @@
 import React from "react";
 import DayColumn from './DayColumn';
 
-interface props {
-  selectedMonthId: number;
-  selectedYear: number;
-}
+import { ColumnGridProps } from '../../../structure/Data/interfaces'
 
 // returns static Sun - Sat grid
-const ColumnGrid = ({ selectedMonthId, selectedYear }: props) => {
+const ColumnGrid = ({ selectedMonthId, selectedYear }: ColumnGridProps) => {
 
   const weekdays: { name: string, id: number }[] = [
     { name: "Sunday", id: 0},

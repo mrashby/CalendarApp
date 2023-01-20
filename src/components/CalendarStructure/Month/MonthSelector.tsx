@@ -1,20 +1,11 @@
 import React from "react";
 
-interface props {
-    id: number,
-    name: string,
-};
+import { MonthSelectorProps } from '../../../structure/Data/interfaces'
 
-const MonthSelector = ({ id, name }: props) => {
-
-    let currentMonth = new Date().getMonth();
-
-    switch ( currentMonth === id ) {
-        case true:
-            return <option className="option" value={id} selected>{name}</option>
-        default:
-            return <option className="option" value={id}>{name}</option>
-    };
+// this was a separate component because I previously had conditionals below that have now been removed
+// leaving this as-is in case I decide to change the logic
+const MonthSelector = ({ id, name }: MonthSelectorProps) => {
+    return <option className="option" value={id}>{name}</option>
 };
 
 export default MonthSelector;

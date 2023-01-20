@@ -2,18 +2,18 @@ import React from "react";
 import DayHeader from "./DayHeader";
 import DayBox from "./DayBox";
 
-interface props {
-  day: string;
-  id: number;
-  selectedMonthId: number;
-  selectedYear: number;
-}
+import { DayColumnProps, DayColumn_CalculateDateGridProps } from '../../../structure/Data/interfaces'
 
-const DayColumn = ({ day, id, selectedMonthId, selectedYear }: props) => {
+const DayColumn = ({ day, id, selectedMonthId, selectedYear }: DayColumnProps) => {
 
   // hardcoded the year + month value temporarily
   let yearValue: number = selectedYear;
   let monthValue: number = selectedMonthId; 
+
+  // declaring variables to highlight the current date on the calendar
+  let thisYear: number = new Date().getFullYear();
+  let thisMonth: number = new Date().getMonth();
+  let thisDate: number = new Date().getDate();
 
   // creating a default date value for the input year + month
   let setDate: Date = new Date(yearValue, monthValue);
@@ -22,12 +22,22 @@ const DayColumn = ({ day, id, selectedMonthId, selectedYear }: props) => {
   let numberOfDaysInMonth: number = new Date(setDate.getFullYear(), setDate.getMonth() + 1, 0).getDate();
 
   // declare main array
-  let numberOfDaysArray: { value: number, id: number, month: number, currentMonth: boolean}[] = [];
+  let numberOfDaysArray: { value: number, id: number, month: number, currentMonth: boolean, today: boolean }[] = [];
 
   // use array to trigger function number of times equal to the days in the month
   for ( let x: number = 1; x <= numberOfDaysInMonth; x++ ) {
-    let idNumber: string = `${monthValue}.${x}`
-    numberOfDaysArray.push({ value: x, id: +idNumber, month: monthValue, currentMonth: true });
+
+    let idNumber: string = `${monthValue}.${x}`;
+
+    // identify the current day, pass to DayBox component
+    switch (thisYear === yearValue && thisMonth === monthValue && thisDate === x) {
+      case true:
+        numberOfDaysArray.push({ value: x, id: +idNumber, month: monthValue, currentMonth: true, today: true });
+        break;
+      default:
+        numberOfDaysArray.push({ value: x, id: +idNumber, month: monthValue, currentMonth: true, today: false });
+        break;
+    };
   };
 
   // fill in blocks if the first day of the month is not Sunday (first grid column)
@@ -39,7 +49,7 @@ const DayColumn = ({ day, id, selectedMonthId, selectedYear }: props) => {
     let previousMonth: number = monthValue - 1;
     let idNumber: string = `${previousMonth}.${getPreviousDate}`
     
-    numberOfDaysArray.unshift({ value: getPreviousDate, id: +idNumber, month: previousMonth, currentMonth: false});
+    numberOfDaysArray.unshift({ value: getPreviousDate, id: +idNumber, month: previousMonth, currentMonth: false, today: false});
   };
 
   // fill in blocks if the last day of the month is not Saturday (last grid column)
@@ -52,19 +62,19 @@ const DayColumn = ({ day, id, selectedMonthId, selectedYear }: props) => {
     let nextMonth: number = monthValue + 1;
     let idNumber: string = `${nextMonth}.${getNextDate}`
     
-    numberOfDaysArray.push({ value: getNextDate, id: +idNumber, month: nextMonth, currentMonth: false});
+    numberOfDaysArray.push({ value: getNextDate, id: +idNumber, month: nextMonth, currentMonth: false, today: false});
     inc++;
   };
 
   // function to assign dates to relevant day column
-  const calculateDateGrid = (dateInput: number, itemId: number, month: number, currentMonth: boolean) => {
+  const calculateDateGrid = ( gridInput: DayColumn_CalculateDateGridProps ) => {
 
-    let dayOfMonth: Date = new Date(setDate.getFullYear(), month, dateInput);
+    let dayOfMonth: Date = new Date(setDate.getFullYear(), gridInput.month, gridInput.dateInput);
     let weekdayNumber: number = dayOfMonth.getDay();
 
     // matching the day of month to the column header
     if (weekdayNumber === id) {
-        return <DayBox key={itemId} dayValue={dateInput} currentMonth={currentMonth} />
+        return <DayBox key={gridInput.itemId} dayValue={gridInput.dateInput} currentMonth={gridInput.currentMonth} today={gridInput.today}/>
       };
     };
 
@@ -72,7 +82,7 @@ const DayColumn = ({ day, id, selectedMonthId, selectedYear }: props) => {
     <li className='weekday'>
       <DayHeader day={day}/>
       { numberOfDaysArray.map(x => 
-        calculateDateGrid(x.value, x.id, x.month, x.currentMonth)
+        calculateDateGrid({ dateInput: x.value, itemId: x.id, month: x.month, currentMonth: x.currentMonth, today: x.today })
       )}
     </li>
   );
