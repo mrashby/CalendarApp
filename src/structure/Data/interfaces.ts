@@ -8,6 +8,15 @@ export interface MonthHeaderProps {
     decreaseMonthHandler: Function;
 };
 
+export interface DateSelectorProps {
+  monthArray: {value: string, id: number }[];
+  yearSelectorArray: number[];
+  updateSelectedMonth: Function;
+  updateSelectedYear: Function;
+  selectedYear: number;
+  selectedMonthId: number;
+};
+
 export interface MonthSelectorProps {
     id: number,
     name: string,
@@ -45,4 +54,9 @@ export interface DayColumnProps {
     dayValue: number;
     currentMonth: boolean;
     today: boolean;
+  }
+
+  export interface MonthsData {
+    value: string;
+    id: number;
   }

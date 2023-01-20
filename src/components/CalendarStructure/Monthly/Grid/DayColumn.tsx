@@ -2,7 +2,7 @@ import React from "react";
 import DayHeader from "./DayHeader";
 import DayBox from "./DayBox";
 
-import { DayColumnProps, DayColumn_CalculateDateGridProps } from '../../../structure/Data/interfaces'
+import { DayColumnProps, DayColumn_CalculateDateGridProps } from '../../../../structure/Data/interfaces'
 
 const DayColumn = ({ day, id, selectedMonthId, selectedYear }: DayColumnProps) => {
 

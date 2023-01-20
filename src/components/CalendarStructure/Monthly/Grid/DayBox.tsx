@@ -1,7 +1,7 @@
 import React from "react";
-import Event from "../../CalendarEvents/Event";
+import Event from "../../../CalendarEvents/Event";
 
-import { DayBoxProps } from '../../../structure/Data/interfaces'
+import { DayBoxProps } from '../../../../structure/Data/interfaces'
 
 const DayBox = ({ dayValue, currentMonth, today }: DayBoxProps) => {
 

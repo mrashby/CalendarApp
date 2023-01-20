@@ -1,5 +1,5 @@
 import React from "react";
-import MonthView from "./components/CalendarStructure/Month/MonthView";
+import MonthView from "./components/CalendarStructure/Monthly/MonthView";
 
 function App() {
   return (

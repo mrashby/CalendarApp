@@ -1,7 +1,7 @@
 import React from "react";
 import DayColumn from './DayColumn';
 
-import { ColumnGridProps } from '../../../structure/Data/interfaces'
+import { ColumnGridProps } from '../../../../structure/Data/interfaces'
 
 // returns static Sun - Sat grid
 const ColumnGrid = ({ selectedMonthId, selectedYear }: ColumnGridProps) => {

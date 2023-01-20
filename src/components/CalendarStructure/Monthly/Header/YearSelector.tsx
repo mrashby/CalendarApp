@@ -1,6 +1,6 @@
 import React from "react";
 
-import { YearSelectorProps } from '../../../structure/Data/interfaces'
+import { YearSelectorProps } from '../../../../structure/Data/interfaces'
 
 
 // this was a separate component because I previously had conditionals below that have now been removed

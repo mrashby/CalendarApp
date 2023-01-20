@@ -1,9 +1,8 @@
 import React from "react";
 
-import MonthSelector from "./MonthSelector";
-import YearSelector from "./YearSelector";
+import DateSelectors from './DateSelectors';
 
-import { MonthHeaderProps } from '../../../structure/Data/interfaces'
+import { MonthHeaderProps } from '../../../../structure/Data/interfaces'
 
 // unsure if I actually want selectedMonth passed...
 // will use for default select option later
@@ -19,13 +18,11 @@ const MonthHeader = (props: MonthHeaderProps) => {
     yearSelectorArray.push(x);
   };
 
-  const updateSelectedMonth = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      let monthId: number = +event.target.value;
+  const updateSelectedMonth = (monthId: number) => {
       props.selectedMonthHandler(monthId);
   };
 
-  const updateSelectedYear = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    let year = +event.target.value;
+  const updateSelectedYear = (year: number) => {
     props.selectedYearHandler(year);
   };
 
@@ -40,18 +37,9 @@ const MonthHeader = (props: MonthHeaderProps) => {
   return (
     <div className="header">
       <button className="change-month" type="button" onClick={decreaseMonth}>{'<'}</button>
-      <div className="date-selectors">
-        <select className='selector' value={props.selectedMonthId} onChange={updateSelectedMonth}>
-          { props.monthArray.map(month => 
-            <MonthSelector key={month.id} id={month.id} name={month.value}/>
-          )}
-        </select>
-        <select className="selector" value={props.selectedYear} onChange={updateSelectedYear}>
-          { yearSelectorArray.map(year => 
-            <YearSelector key={year} year={year} />
-          )}
-        </select>
-      </div>
+      <DateSelectors updateSelectedMonth={updateSelectedMonth} selectedMonthId={props.selectedMonthId}
+        updateSelectedYear={updateSelectedYear} selectedYear={props.selectedYear}
+        monthArray={props.monthArray} yearSelectorArray={yearSelectorArray} />
       <button className="change-month" type="button" onClick={increaseMonth}>{'>'}</button>
     </div>
   );
