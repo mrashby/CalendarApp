@@ -15,13 +15,13 @@ const DayColumn = ({ day, id, setDate, generatedMonthGrid, setSelectProperty }: 
   // function to assign dates to relevant day column
   const calculateDateGrid = ( gridInput: DayColumn_CalculateDateGridProps ) => {
 
-    let dayOfMonth: Date = new Date(setDate.getFullYear(), gridInput.month, gridInput.dateInput);
+    let dayOfMonth: Date = new Date(gridInput.year, gridInput.month, gridInput.dateInput);
     let weekdayNumber: number = dayOfMonth.getDay();
 
     // matching the day of month to the column header
     if (weekdayNumber === id) {
-        return <DayBox key={gridInput.itemId} dayValue={gridInput.dateInput} currentMonth={gridInput.currentMonth} 
-          today={gridInput.today} selected={gridInput.selected} handleSelectedGridProperty={handleSelectedGridProperty}/>
+        return <DayBox key={gridInput.itemId} id={gridInput.itemId} dayValue={gridInput.dateInput} month={gridInput.month} year={gridInput.year}
+        currentMonth={gridInput.currentMonth} today={gridInput.today} selected={gridInput.selected} handleSelectedGridProperty={handleSelectedGridProperty}/>
       };
     };
 
@@ -29,7 +29,7 @@ const DayColumn = ({ day, id, setDate, generatedMonthGrid, setSelectProperty }: 
     <li className='weekday'>
       <DayHeader day={day}/>
       { generatedMonthGrid.map(x => 
-        calculateDateGrid({ dateInput: x.value, itemId: x.id, month: x.month, currentMonth: x.currentMonth, today: x.today, selected: x.selected })
+        calculateDateGrid({ dateInput: x.value, itemId: x.id, month: x.month, year: x.year, currentMonth: x.currentMonth, today: x.today, selected: x.selected })
       )}
     </li>
   );

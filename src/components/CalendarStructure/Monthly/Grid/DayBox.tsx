@@ -1,9 +1,9 @@
 import React from "react";
-import Event from "../../../CalendarEvents/Event";
+import Events from "../../../CalendarEvents/Events";
 
 import { DayBoxProps } from '../../../../structure/Data/interfaces'
 
-const DayBox = ({ dayValue, currentMonth, today, selected, handleSelectedGridProperty }: DayBoxProps) => {
+const DayBox = ({ id, dayValue, month, year, currentMonth, today, selected, handleSelectedGridProperty }: DayBoxProps) => {
 
   // I think I can manage the state for 'selected' separately
   // leaving this here until I confirm
@@ -30,12 +30,13 @@ const DayBox = ({ dayValue, currentMonth, today, selected, handleSelectedGridPro
   const clickMe = (event: React.MouseEvent<HTMLElement>) => {
     // console.log(event.currentTarget);
     handleSelectedGridProperty(dayValue, currentMonth);
+    console.log(id);
   }
 
   return (
     <div className={divClass} onClick={clickMe}>
       <div className='day-text'>{dayValue}</div>
-      <Event />
+      <Events id={id} year={year} month={month} day={dayValue}/>
     </div>
   );
 };

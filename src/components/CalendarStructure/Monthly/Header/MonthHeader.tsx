@@ -1,8 +1,18 @@
 import React from "react";
+import { Month } from "../../../../structure/Data/interfaces";
 
 import DateSelectors from './DateSelectors';
 
-import { MonthHeaderProps } from '../../../../structure/Data/interfaces'
+interface MonthHeaderProps {
+  monthArray: Month[];
+  selectedMonthHandler: (monthInput: number) => void;
+  selectedMonthId: number;
+  selectedYearHandler: (yearInput: number) => void;
+  selectedYear: number;
+  increaseMonthHandler: () => void;
+  decreaseMonthHandler: () => void;
+  setToday: () => void;
+};
 
 // unsure if I actually want selectedMonth passed...
 // will use for default select option later

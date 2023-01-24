@@ -1,44 +1,16 @@
-export interface MonthHeaderProps {
-    monthArray: {value: string, id: number }[];
-    selectedMonthHandler: Function;
-    selectedMonthId: number;
-    selectedYearHandler: Function;
-    selectedYear: number;
-    increaseMonthHandler: Function;
-    decreaseMonthHandler: Function;
-    setToday: Function;
-};
-
-export interface DateSelectorProps {
-  monthArray: {value: string, id: number }[];
-  yearSelectorArray: number[];
-  updateSelectedMonth: Function;
-  updateSelectedYear: Function;
-  selectedYear: number;
-  selectedMonthId: number;
-};
-
-export interface MonthSelectorProps {
+export interface Month {
+    value: string, 
     id: number,
-    name: string,
-};
+}
 
-export interface YearSelectorProps {
+export interface GridArray { 
+  value: number, 
+  id: string, 
+  month: number, 
   year: number,
-};
-
-export interface ColumnGridProps {
-  generatedMonthGrid: 
-    { 
-      value: number, 
-      id: number, 
-      month: number, 
-      currentMonth: boolean, 
-      today: boolean, 
-      selected: boolean 
-    }[];
-  setDate: Date;
-  setSelectProperty: Function;
+  currentMonth: boolean, 
+  today: boolean, 
+  selected: boolean,
 }
 
 export interface DayColumnProps {
@@ -48,37 +20,49 @@ export interface DayColumnProps {
     generatedMonthGrid: 
       { 
         value: number, 
-        id: number, 
+        id: string, 
         month: number, 
+        year: number,
         currentMonth: boolean, 
         today: boolean, 
-        selected: boolean 
+        selected: boolean,
       }[];
     setSelectProperty: Function;
-  }
+  };
 
   export interface DayColumn_CalculateDateGridProps {
     dateInput: number;
-    itemId: number; 
+    itemId: string; 
     month: number;
-    currentMonth: boolean, 
-    today: boolean,
-    selected: boolean,
-  }
+    year: number;
+    currentMonth: boolean;
+    today: boolean;
+    selected: boolean;
+  };
   
   export interface DayHeaderProps {
     day: string;
-  }
+  };
 
   export interface DayBoxProps {
+    id: string;
     dayValue: number;
+    month: number;
+    year: number;
     currentMonth: boolean;
     today: boolean;
     selected: boolean;
     handleSelectedGridProperty: Function;
-  }
+  };
 
   export interface MonthsData {
     value: string;
     id: number;
-  }
+  };
+
+  export interface EventsProps {
+    id: string;
+    year: number;
+    month: number;
+    day: number;
+  };

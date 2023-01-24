@@ -1,7 +1,13 @@
 import React from "react";
+import { GridArray } from "../../../../structure/Data/interfaces";
+
 import DayColumn from './DayColumn';
 
-import { ColumnGridProps } from '../../../../structure/Data/interfaces'
+interface ColumnGridProps {
+  generatedMonthGrid: GridArray[];
+  setDate: Date;
+  setSelectProperty: Function;
+};
 
 // returns static Sun - Sat grid
 const ColumnGrid = ({ setDate, setSelectProperty, generatedMonthGrid }: ColumnGridProps) => {

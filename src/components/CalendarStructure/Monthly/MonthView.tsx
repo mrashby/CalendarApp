@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
+import { Month } from "../../../structure/Data/interfaces";
 
 import ColumnGrid from "./Grid/ColumnGrid";
 import MonthHeader from "./Header/MonthHeader";
 
-import { months } from '../../../structure/Data/data'
-
 const MonthView = () => {
 
+  const months: Month[] = [
+    { value: "January", id: 0 },
+    { value: "February", id: 1 },
+    { value: "March", id: 2 },
+    { value: "April", id: 3 },
+    { value: "May", id: 4 },
+    { value: "June", id: 5 },
+    { value: "July", id: 6 },
+    { value: "August", id: 7 },
+    { value: "September", id: 8 },
+    { value: "October", id: 9 },
+    { value: "November", id: 10 },
+    { value: "December", id: 11 },
+  ];
   /************** FUNCTIONS THAT MANAGE STATE ***************/
 
   // set month to selected dropdown value
@@ -90,19 +103,19 @@ const MonthView = () => {
   let numberOfDaysInMonth: number = new Date(setDate.getFullYear(), setDate.getMonth() + 1, 0).getDate();
 
   // declare main array
-  let numberOfDaysArray: { value: number, id: number, month: number, currentMonth: boolean, today: boolean, selected: boolean }[] = [];
+  let numberOfDaysArray: { value: number, id: string, month: number, year: number, currentMonth: boolean, today: boolean, selected: boolean }[] = [];
 
   // use array to trigger function number of times equal to the days in the month
   for ( let x: number = 1; x <= numberOfDaysInMonth; x++ ) {
-    let idNumber: string = `${monthValue}.${x}`;
+    let idNumber: string = `${yearValue}-${monthValue}-${x}`;
 
     // identify the current day, pass to DayBox component
     switch (thisYear === yearValue && thisMonth === monthValue && thisDate === x) {
       case true:
-        numberOfDaysArray.push({ value: x, id: +idNumber, month: monthValue, currentMonth: true, today: true, selected: false });
+        numberOfDaysArray.push({ value: x, id: idNumber, month: monthValue, year: yearValue, currentMonth: true, today: true, selected: false });
         break;
       default:
-        numberOfDaysArray.push({ value: x, id: +idNumber, month: monthValue, currentMonth: true, today: false, selected: false });
+        numberOfDaysArray.push({ value: x, id: idNumber, month: monthValue, year: yearValue, currentMonth: true, today: false, selected: false });
         break;
     };
   };
@@ -114,9 +127,15 @@ const MonthView = () => {
 
     let getPreviousDate: number = new Date(setDate.getFullYear(), setDate.getMonth(), x).getDate();
     let previousMonth: number = monthValue - 1;
-    let idNumber: string = `${previousMonth}.${getPreviousDate}`
+    let calculatedYear: number = yearValue;
+    if (previousMonth === -1) 
+      {
+        previousMonth = 11; 
+        calculatedYear = yearValue - 1;
+      };
+    let idNumber: string = `${calculatedYear}-${previousMonth}-${getPreviousDate}`
     
-    numberOfDaysArray.unshift({ value: getPreviousDate, id: +idNumber, month: previousMonth, currentMonth: false, today: false, selected: false });
+    numberOfDaysArray.unshift({ value: getPreviousDate, id: idNumber, month: previousMonth, year: calculatedYear, currentMonth: false, today: false, selected: false });
   };
 
   // fill in blocks if the last day of the month is not Saturday (last grid column)
@@ -127,9 +146,15 @@ const MonthView = () => {
   for ( let x: number = 6; x > lastDayOfMonth; x-- ) {
     let getNextDate: number = new Date(setDate.getFullYear(), setDate.getMonth() + 1, inc).getDate();
     let nextMonth: number = monthValue + 1;
-    let idNumber: string = `${nextMonth}.${getNextDate}`
+    let calculatedYear: number = yearValue;
+    if (nextMonth === 12) 
+      {
+        nextMonth = 0; 
+        calculatedYear = yearValue + 1;
+      };
+    let idNumber: string = `${calculatedYear}-${nextMonth}-${getNextDate}`
     
-    numberOfDaysArray.push({ value: getNextDate, id: +idNumber, month: nextMonth, currentMonth: false, today: false, selected: false });
+    numberOfDaysArray.push({ value: getNextDate, id: idNumber, month: nextMonth, year: calculatedYear, currentMonth: false, today: false, selected: false });
     inc++;
   };
 
@@ -150,15 +175,17 @@ const MonthView = () => {
 
   // logic to handle selected (highlighted) day
   const setSelectProperty = (date: number, current: boolean) => {
-    let newArray: { value: number, id: number, month: number, currentMonth: boolean, today: boolean, selected: boolean }[] = [];
+    let newArray: { value: number, id: string, month: number, year: number, currentMonth: boolean, today: boolean, selected: boolean }[] = [];
       for ( let x = 0; x < numberOfDaysArray.length; x++) {
         if (date === numberOfDaysArray[x].value && current === numberOfDaysArray[x].currentMonth) {
           newArray.push({ value: numberOfDaysArray[x].value, id: numberOfDaysArray[x].id, month: numberOfDaysArray[x].month, 
-                          currentMonth: numberOfDaysArray[x].currentMonth, today: numberOfDaysArray[x].today, selected: true })
+                          year: numberOfDaysArray[x].year, currentMonth: numberOfDaysArray[x].currentMonth, 
+                          today: numberOfDaysArray[x].today, selected: true })
         }
         else {
           newArray.push({ value: numberOfDaysArray[x].value, id: numberOfDaysArray[x].id, month: numberOfDaysArray[x].month, 
-                          currentMonth: numberOfDaysArray[x].currentMonth, today: numberOfDaysArray[x].today, selected: false })
+                          year: numberOfDaysArray[x].year, currentMonth: numberOfDaysArray[x].currentMonth, 
+                          today: numberOfDaysArray[x].today, selected: false })
         }
       }
 

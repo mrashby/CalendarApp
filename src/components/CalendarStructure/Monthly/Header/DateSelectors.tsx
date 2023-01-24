@@ -3,7 +3,16 @@ import React from "react";
 import MonthSelector from "./MonthSelector";
 import YearSelector from "./YearSelector";
 
-import { DateSelectorProps } from '../../../../structure/Data/interfaces'
+import { Month } from '../../../../structure/Data/interfaces'
+
+interface DateSelectorProps {
+  monthArray: Month[];
+  yearSelectorArray: number[];
+  updateSelectedMonth: (monthId: number) => void;
+  updateSelectedYear: (year: number) => void;
+  selectedYear: number;
+  selectedMonthId: number;
+};
 
 const DateSelectors = (props: DateSelectorProps) => {
 
