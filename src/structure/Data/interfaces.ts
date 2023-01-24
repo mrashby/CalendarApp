@@ -6,6 +6,7 @@ export interface MonthHeaderProps {
     selectedYear: number;
     increaseMonthHandler: Function;
     decreaseMonthHandler: Function;
+    setToday: Function;
 };
 
 export interface DateSelectorProps {
@@ -27,15 +28,33 @@ export interface YearSelectorProps {
 };
 
 export interface ColumnGridProps {
-  selectedMonthId: number;
-  selectedYear: number;
+  generatedMonthGrid: 
+    { 
+      value: number, 
+      id: number, 
+      month: number, 
+      currentMonth: boolean, 
+      today: boolean, 
+      selected: boolean 
+    }[];
+  setDate: Date;
+  setSelectProperty: Function;
 }
 
 export interface DayColumnProps {
     day: string;
     id: number;
-    selectedMonthId: number;
-    selectedYear: number;
+    setDate: Date;
+    generatedMonthGrid: 
+      { 
+        value: number, 
+        id: number, 
+        month: number, 
+        currentMonth: boolean, 
+        today: boolean, 
+        selected: boolean 
+      }[];
+    setSelectProperty: Function;
   }
 
   export interface DayColumn_CalculateDateGridProps {
@@ -44,6 +63,7 @@ export interface DayColumnProps {
     month: number;
     currentMonth: boolean, 
     today: boolean,
+    selected: boolean,
   }
   
   export interface DayHeaderProps {
@@ -54,6 +74,8 @@ export interface DayColumnProps {
     dayValue: number;
     currentMonth: boolean;
     today: boolean;
+    selected: boolean;
+    handleSelectedGridProperty: Function;
   }
 
   export interface MonthsData {

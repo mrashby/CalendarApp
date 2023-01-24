@@ -20,7 +20,7 @@ const DateSelectors = (props: DateSelectorProps) => {
     }
 
     return (
-        <div className="date-selectors">
+      <div>
         <select className='selector' value={props.selectedMonthId} onChange={updateSelectedMonth}>
           { props.monthArray.map(month => 
             <MonthSelector key={month.id} id={month.id} name={month.value}/>

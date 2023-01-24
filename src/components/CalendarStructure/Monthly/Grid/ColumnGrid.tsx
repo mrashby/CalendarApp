@@ -4,7 +4,11 @@ import DayColumn from './DayColumn';
 import { ColumnGridProps } from '../../../../structure/Data/interfaces'
 
 // returns static Sun - Sat grid
-const ColumnGrid = ({ selectedMonthId, selectedYear }: ColumnGridProps) => {
+const ColumnGrid = ({ setDate, setSelectProperty, generatedMonthGrid }: ColumnGridProps) => {
+
+  const handleSelectProperty = (date: number, current: boolean) => {
+    setSelectProperty(date, current);
+  }
 
   const weekdays: { name: string, id: number }[] = [
     { name: "Sunday", id: 0},
@@ -19,7 +23,7 @@ const ColumnGrid = ({ selectedMonthId, selectedYear }: ColumnGridProps) => {
   return (
     <ul className='weekdays'>
         {weekdays.map(day =>
-            <DayColumn key={day.id} day={day.name} id={day.id} selectedMonthId={selectedMonthId} selectedYear={selectedYear} />
+            <DayColumn key={day.id} day={day.name} id={day.id} setDate={setDate} generatedMonthGrid={generatedMonthGrid} setSelectProperty={handleSelectProperty} />
         )}
     </ul>
   );

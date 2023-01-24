@@ -34,12 +34,19 @@ const MonthHeader = (props: MonthHeaderProps) => {
     props.decreaseMonthHandler();
   };
 
+  const setToday = () => {
+    props.setToday();
+  };
+
   return (
     <div className="header">
       <button className="change-month" type="button" onClick={decreaseMonth}>{'<'}</button>
-      <DateSelectors updateSelectedMonth={updateSelectedMonth} selectedMonthId={props.selectedMonthId}
-        updateSelectedYear={updateSelectedYear} selectedYear={props.selectedYear}
-        monthArray={props.monthArray} yearSelectorArray={yearSelectorArray} />
+      <div className="date-selectors">
+        <DateSelectors updateSelectedMonth={updateSelectedMonth} selectedMonthId={props.selectedMonthId}
+          updateSelectedYear={updateSelectedYear} selectedYear={props.selectedYear}
+          monthArray={props.monthArray} yearSelectorArray={yearSelectorArray} />
+        <button className="today" type="button" onClick={setToday}>Today</button>
+      </div>
       <button className="change-month" type="button" onClick={increaseMonth}>{'>'}</button>
     </div>
   );
