@@ -6,10 +6,7 @@ const Events = ({ id }: EventsProps) => {
     return (
     <div className="events">
         <div className="event">
-            {id}
-        </div>
-        <div className="event">
-            {id}
+            Event Date {id}
         </div>
     </div>
 )};

@@ -103,7 +103,7 @@ html {
     border: 1px rgb(81, 76, 76);
     border-style: solid;
     height: 135px;
-    background-color: rgba(103, 201, 198, 0.318);
+    background-color: rgba(205, 231, 230, 0);
 }
 
 .diff-day-box {
@@ -131,7 +131,7 @@ html {
 .event {
     font-size: 18px;
     background-color: rgba(249, 246, 246, 0.288);
-    color: rgba(73, 102, 102, 0.717);
+    color: rgba(7, 7, 7, 0.748);
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 2px;
